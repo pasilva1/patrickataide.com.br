@@ -1,6 +1,6 @@
 # Patrick Ataíde | Portfólio
 
-Portfólio profissional de Patrick Ataíde, com foco em Quality Assurance (QA), automação web, integração de sistemas e infraestrutura. O site apresenta sua trajetória, tecnologias, premiações, formação, projetos web e canais de contato.
+Portfólio profissional de Patrick Ataíde, com foco em Quality Assurance (QA), automação web, integração de sistemas e infraestrutura. O site apresenta sua trajetória, tecnologias, premiações, formação, projetos web e canais de contato..
 
 - **Site:** [patrickataide.com.br](https://patrickataide.com.br/)
 - **Repositório:** [github.com/pasilva1/patrickataide.com.br](https://github.com/pasilva1/patrickataide.com.br)
