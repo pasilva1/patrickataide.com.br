@@ -12,6 +12,7 @@ O site é uma página estática construída com HTML, CSS e JavaScript nativos. 
 Entre os recursos da página estão:
 
 - Layout responsivo com navegação para dispositivos móveis.
+- Seção de destaque “Especialista em Automação” em largura total, com letras contornadas por partículas sobre fundo preto e suporte a movimento reduzido.
 - Mapa interativo de tecnologias em SVG, com suporte a mouse e teclado.
 - Seções de destaque profissional, formação e projetos de sites.
 - Contatos por e-mail, telefone, LinkedIn e WhatsApp.
@@ -31,13 +32,15 @@ Entre os recursos da página estão:
 ├── css/
 │   └── styles.css
 ├── js/
+│   ├── automation-particles.js
 │   └── main.js
+├── LICENSE-especialista.txt
 ├── generate_cv.py
 ├── index.html
 └── README.md
 ```
 
-`index.html` contém o conteúdo e a estrutura da página. `css/styles.css` define o tema, o layout e os estados responsivos. `js/main.js` controla o menu móvel, o widget do WhatsApp e a interação com o mapa de tecnologias. `assets/` guarda imagens, ícone e o currículo publicado.
+`index.html` contém o conteúdo e a estrutura da página. `css/styles.css` define o tema, o layout e os estados responsivos. `js/main.js` controla o menu móvel, o widget do WhatsApp e a interação com o mapa de tecnologias. `js/automation-particles.js` adapta o script Three.js original: o cursor dispersa e colore as partículas, e o clique as atrai com cores animadas. A seção usa Three.js r125 e carrega a fonte e a textura de partículas do CodePen via Cloudinary. O título continua acessível sem animação, que é desativada para quem prefere movimento reduzido. `LICENSE-especialista.txt` preserva a licença e a atribuição do experimento original. `assets/` guarda imagens, ícone e o currículo publicado.
 
 ## Executar localmente
 
