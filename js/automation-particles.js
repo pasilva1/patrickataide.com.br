@@ -1,7 +1,6 @@
 const preload = () => {
   const section = document.querySelector(".specialty-section");
   if (!section) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (!window.THREE || !THREE.FontLoader) {
     console.error("The original automation particle effect could not load Three.js and FontLoader.");
     return;
@@ -13,7 +12,8 @@ const preload = () => {
     try {
       new Environment(section, typo, particle);
     } catch (error) {
-      section.querySelector("#automation-particles canvas")?.remove();
+      const canvas = section.querySelector("#automation-particles canvas");
+      if (canvas) canvas.parentNode.removeChild(canvas);
       console.error("The original automation particle effect could not be initialized:", error);
     }
   }
@@ -61,7 +61,12 @@ class Environment {
 
     window.addEventListener( 'resize', this.onWindowResize.bind( this ));
     document.addEventListener("visibilitychange", this.updateAnimationLoop.bind(this));
-    this.motionPreference.addEventListener("change", this.updateAnimationLoop.bind(this));
+    const onMotionPreferenceChange = this.updateAnimationLoop.bind(this);
+    if (typeof this.motionPreference.addEventListener === "function") {
+      this.motionPreference.addEventListener("change", onMotionPreferenceChange);
+    } else {
+      this.motionPreference.addListener(onMotionPreferenceChange);
+    }
   }
 
   setup(){
@@ -105,8 +110,13 @@ class Environment {
   }
 
   updateAnimationLoop() {
-    if (this.motionPreference.matches || document.hidden) {
+    if (document.hidden) {
       this.renderer.setAnimationLoop(null);
+      return;
+    }
+    if (this.motionPreference.matches) {
+      this.renderer.setAnimationLoop(null);
+      this.render();
       return;
     }
     this.renderer.setAnimationLoop(() => this.render());
