@@ -15,8 +15,11 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js"></script>
+  <script defer src="js/automation-particles.js"></script>
+  <script defer src="js/main.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -91,13 +94,42 @@
   </aside>
 
   <main id="conteudo">
+    <section class="specialty-section" aria-labelledby="specialty-title">
+      <h1 class="specialty-title" id="specialty-title">Especialista em Automação</h1>
+      <script type="x-shader/x-vertex" id="vertexshader">
+        attribute float size;
+        attribute vec3 customColor;
+        varying vec3 vColor;
+        void main() {
+          vColor = customColor;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = size * (300.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      </script>
+      <script type="x-shader/x-fragment" id="fragmentshader">
+        uniform vec3 color;
+        uniform sampler2D pointTexture;
+        varying vec3 vColor;
+        void main() {
+          gl_FragColor = vec4(color * vColor, 1.0);
+          gl_FragColor *= texture2D(pointTexture, gl_PointCoord);
+        }
+      </script>
+      <div class="automation-particles" id="automation-particles" aria-hidden="true"></div>
+    </section>
     <section class="hero" id="inicio">
       <div class="hero-content">
-        <h1>Automação web e testes, com uma única API.</h1>
-        <p>Sou Patrick Ataíde. No GitHub, o Playwright se define como framework de automação e testes web: conduz Chromium, Firefox e WebKit com uma única API, nos testes, nos scripts e como ferramenta para agentes de IA.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#contato" data-testid="inicio:hero:solicitar-automacao">Solicitar automação</a>
-          <a class="btn btn-ghost" href="#tecnologias" data-testid="inicio:hero:ver-qae">Ver tecnologias</a>
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="Engrenagens em movimento representando automação e testes de software">
+          <source src="assets/engrenagens.mp4" type="video/mp4">
+          Seu navegador não oferece suporte a vídeos HTML5.
+        </video>
+        <div class="hero-copy">
+          <h2>Automação web e testes.</h2>
+          <p>Forte atuação em Python, Docker, escalabilidade, testabilidade, SQL, integração de dados e APIs. Experiência em governança, gestão ágil, versionamento Git, desenvolvimento com boas práticas, qualidade (QA), orquestração CI/CD, documentação, monitoramento e comunicação assertiva.</p>
+          <div class="hero-actions">
+            <a class="btn btn-ghost" href="#tecnologias" data-testid="inicio:hero:ver-qae">Ver tecnologias</a>
+          </div>
         </div>
       </div>
     </section>
@@ -343,6 +375,5 @@
     </button>
   </div>
 
-  <script src="js/main.js"></script>
 </body>
 </html>
