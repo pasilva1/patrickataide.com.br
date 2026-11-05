@@ -863,6 +863,35 @@ ul {
   background: var(--primary-light);
 }
 
+.profile-frame img {
+  transform-origin: center;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .profile-frame:hover {
+    animation: profile-jelly 700ms ease both;
+  }
+}
+
+@media (hover: none) {
+  .profile-frame {
+    animation: profile-pulse 2.8s ease-in-out infinite;
+  }
+}
+
+@keyframes profile-jelly {
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(1.08, 0.94); }
+  45% { transform: scale(0.96, 1.06); }
+  65% { transform: scale(1.04, 0.98); }
+  82% { transform: scale(0.99, 1.02); }
+}
+
+@keyframes profile-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
 .profile-bg {
   width: 100%;
   height: 100%;
